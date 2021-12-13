@@ -55,7 +55,7 @@ const SignUp = () => {
     <Row className="mt-3 justify-content-center">
       <Col lg="5">
         <Alert dismissible variant="danger" onClose={() => setError(false)} show={error}>
-          Error regitrando el usuario
+          Error registrando el usuario
         </Alert>
         <Alert dismissible variant="success" onClose={() => setSuccess(false)} show={success}>
           Usuario creado con éxito. Haz click <Link className="alert-link" to="/">aquí</Link> para iniciar session
