@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 import 'styles/App.scss';
 
 // views
-import Home from 'home/views/home.view';
+// import Home from 'home/views/home.view';
 import Projects from 'projects/views/projects.view';
 import SignUp from 'users/views/signup.view';
 import Menu from 'components/menu.component';
@@ -21,7 +21,7 @@ function App() {
       <Menu />
       <Container>
         <Routes>
-          <Route index element={<Home />} />
+          {/* <Route index element={<Home />} /> */}
           <Route path="projects" element={<Projects />} />
           <Route path="users">
             <Route index element={<Users />} />
