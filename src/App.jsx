@@ -9,6 +9,7 @@ import 'styles/App.scss';
 // views
 import Home from 'home/views/home.view';
 import Projects from 'projects/views/projects.view';
+import ProjectsE from 'projects/views/enrrolmentsE.view'
 import SignUp from 'users/views/signup.view';
 import Menu from 'components/menu.component';
 import Users from 'users/views/users.view';
@@ -22,9 +23,10 @@ function App() {
       <Menu />
       <Container>
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<Home/>} />
           <Route path="projects" element={<Projects />} />
-            <Route path="leader" element={<Leader />} />
+          <Route path="leader" element={<Leader />} />
+          <Route path="registros" element={<ProjectsE />} />
           <Route path="users">
             <Route index element={<Users />} />
             <Route path="signup" element={<SignUp />} />
