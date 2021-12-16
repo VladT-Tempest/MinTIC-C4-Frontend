@@ -104,14 +104,9 @@ const Projects = () => {
   <table class="table table-responsive table-bordered table-hover table-sm">
     <thead>
       <tr class="text-center">
-        <th>#</th>
         <th>Nombre</th>
-        <th>Objetivo General</th>
-        <th>Objetivo Especifico</th>
-        <th>Presupuesto</th>
         <th>Fecha de inicio</th>
         <th>Fecha de Finalización</th>
-        <th># de líder </th>
         <th>Estado</th>
         <th>Fase</th>
       </tr>
@@ -123,11 +118,6 @@ const Projects = () => {
         <td>john@example.com</td>
         <td>john@example.com</td>
         <td>john@example.com</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
       </tr>
       <tr>
         <td>Mary</td>
@@ -135,20 +125,10 @@ const Projects = () => {
         <td>mary@example.com</td>
         <td>mary@example.com</td>
         <td>mary@example.com</td>
-        <td>mary@example.com</td>
-        <td>mary@example.com</td>
-        <td>mary@example.com</td>
-        <td>mary@example.com</td>
-        <td>mary@example.com</td>
       </tr>
       <tr>
         <td>July</td>
         <td>Dooley</td>
-        <td>july@example.com</td>
-        <td>july@example.com</td>
-        <td>july@example.com</td>
-        <td>july@example.com</td>
-        <td>july@example.com</td>
         <td>july@example.com</td>
         <td>july@example.com</td>
         <td>july@example.com</td>
