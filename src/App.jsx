@@ -2,6 +2,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // styles
 import 'styles/App.scss';
@@ -9,6 +10,7 @@ import 'styles/App.scss';
 // views
 import Home from 'home/views/home.view';
 import Projects from 'projects/views/projects.view';
+import ProjectsAdm from 'projects/views/projects.viewADM'
 import ProjectsE from 'projects/views/enrrolmentsE.view'
 import SignUp from 'users/views/signup.view';
 import Menu from 'components/menu.component';
@@ -27,6 +29,7 @@ function App() {
           <Route path="projects" element={<Projects />} />
           <Route path="leader" element={<Leader />} />
           <Route path="registros" element={<ProjectsE />} />
+            <Route path="administrador" element={<ProjectsAdm />} />
           <Route path="users">
             <Route index element={<Users />} />
             <Route path="signup" element={<SignUp />} />

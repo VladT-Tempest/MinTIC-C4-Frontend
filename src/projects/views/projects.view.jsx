@@ -1,4 +1,4 @@
-// vedors
+// vendors
 import React from "react";
 import { useMutation, useQuery, gql } from '@apollo/client';
 import jwt from 'jsonwebtoken';
