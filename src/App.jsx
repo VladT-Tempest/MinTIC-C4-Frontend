@@ -11,10 +11,12 @@ import 'styles/App.scss';
 import Home from 'home/views/home.view';
 import Projects from 'projects/views/projects.view';
 import ProjectsAdm from 'projects/views/projects.viewADM'
+import ProjectsE from 'projects/views/enrrolmentsE.view'
 import SignUp from 'users/views/signup.view';
 import Menu from 'components/menu.component';
 import Users from 'users/views/users.view';
 import Login from 'users/views/login.view';
+import Leader from 'projects/views/projectsbyleader.view';
 import NoAccess from 'components/no-access.component';
 
 function App() {
@@ -23,8 +25,11 @@ function App() {
       <Menu />
       <Container>
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<Home/>} />
           <Route path="projects" element={<Projects />} />
+          <Route path="leader" element={<Leader />} />
+          <Route path="registros" element={<ProjectsE />} />
+            <Route path="administrador" element={<ProjectsAdm />} />
           <Route path="users">
             <Route index element={<Users />} />
             <Route path="signup" element={<SignUp />} />
