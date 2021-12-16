@@ -1,9 +1,11 @@
-// // vedors
-// import React, { useCallback, useEffect, useState } from "react";
-// import { useMutation, useQuery, gql } from '@apollo/client';
+// vedors
+import React, { useCallback, useEffect, useState } from "react";
+import { useMutation, useQuery, gql } from '@apollo/client';
+
+import 'projects/styles/projects.styles.scss';
 
 // // styles
-// import 'projects/styles/projects.styles.scss';
+
 
 // const REPOSITORIES_QUERY = gql`
 //   query MyRepositories ($first: Int!){
@@ -94,49 +96,44 @@
 
 // export default Projects;
 
-import React from 'react'
+const PROYECTS = gql`
+query AllProjects {
+  allProjects {
+    name
+    startDate
+    endDate
+    status
+    phase
+  }
+}
+`;
 
 const Projects = () => {
-  return (
-    <div class="mt-3">
-      <h2>Projectos</h2>
-  <p>Listado de todos los proyectos</p>            
-  <table class="table table-responsive table-bordered table-hover table-sm">
-    <thead>
-      <tr class="text-center">
-        <th>Nombre</th>
-        <th>Fecha de inicio</th>
-        <th>Fecha de Finalización</th>
-        <th>Estado</th>
-        <th>Fase</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-        <td>mary@example.com</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-        <td>july@example.com</td>
-        <td>july@example.com</td>
-      </tr>
-    </tbody>
-  </table>
-    </div>
-  )
-}
+  
+      const {data} = useQuery(PROYECTS);
+          
+      return<>{!data ? <></> : data?.allProjects?.map(project => (
+        <>
+          <div key={project.name}>{project.name} {project.startDate} {project.endDate} {project.status} {project.phase} </div>
+        </>
+      ))}</>
+  };
+
 
 export default Projects
+
+/* <>
+<section className="grid" style={{"--bs-columns": 4, "--bs-gap": '10px 0'}}>
+<span>{'Nombre'}</span>
+<span>{'Fecha de Inicio'}</span>
+<span className="g-col-2">{'Estado'}</span>
+{data?.project?.map(({ name, startDate, status }) => {
+return (
+<>
+  <span>{Projects?.name}</span>
+  <span>{Projects?.startDate}</span>
+  <span>{Projects.status}</span>
+</>
+)})}
+</section>
+</> */
