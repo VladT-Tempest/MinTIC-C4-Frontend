@@ -58,7 +58,7 @@ const SignUp = () => {
           Error regitrando el usuario
         </Alert>
         <Alert dismissible variant="success" onClose={() => setSuccess(false)} show={success}>
-          Usuario creado con éxito. Haz click <Link className="alert-link" to="/">aquí</Link> para iniciar session
+          Usuario creado con éxito. Haz click <Link className="alert-link" to="/">aquí</Link> para iniciar sesión
         </Alert>
         <Formik
           initialValues={initialValues}
