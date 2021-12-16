@@ -326,9 +326,6 @@ class Leader extends React.Component {
         this.state = {
             id_project: null,
             module:null,
-            initialValuesProject:{
-                name: null
-            }
         }
     }
     handleClick(id, module)
