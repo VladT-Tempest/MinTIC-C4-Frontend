@@ -1,95 +1,134 @@
-// vedors
-import React, { useCallback, useEffect, useState } from "react";
+// vendors
+import React from "react";
 import { useMutation, useQuery, gql } from '@apollo/client';
+import jwt from 'jsonwebtoken';
 
 // styles
 import 'projects/styles/projects.styles.scss';
 
-const REPOSITORIES_QUERY = gql`
-  query MyRepositories ($first: Int!){
-    viewer { 
+const project = gql `
+  query Allproject {
+    allProjectsEstudiante019 {
+      _id
       name
-      repositories (first: $first){
-        nodes {
-          id
-          name
-          viewerHasStarred
-          stargazers {
-            totalCount
-          }
-        }
+      leader{
+        fullName
+        email
       }
+      generalObjective
+      startDate
+      budget
+      status
+      
+     
     }
   }
 `;
 
-const ADD_START = gql`
-  mutation AddStart($starrableId: ID!) {
-    addStar(input: {
-      starrableId: $starrableId
-    }) {
-      starrable {
-        stargazers {
-          totalCount
+const EDIT_PROJECT = gql `
+  mutation RegisterEnrrolment020($input: enrrolmentInput!) {
+  registerEnrrolment020(input: $input) 
+        {
+          enrollmentDate    
         }
-      }
     }
-  }
+  
 `;
+const RegistroButon = (props) => {
+  console.log(props.project_name);
+  const [editProject] = useMutation(EDIT_PROJECT);
+  
+  
+  editProject({
+    variables: {
+        input: {
+            project: props.project_name
+        },
 
-const REMOVE_START = gql`
-  mutation RemoveStart($starrableId: ID!) {
-    removeStar(input: {
-      starrableId: $starrableId
-    }) {
-      starrable {
-        stargazers {
-          totalCount
-        }
-      }
     }
-  }
-`;
+  })
 
-const Projects = () => {
-  const [first, setFirst] = useState(1);
-  const { data, refetch } = useQuery(REPOSITORIES_QUERY, { variables: { first } });
-  const [addStar] = useMutation(ADD_START, {
-    refetchQueries: [ REPOSITORIES_QUERY ]
-  });
-  const [removeStar] = useMutation(REMOVE_START, {
-    refetchQueries: [ REPOSITORIES_QUERY ]
-  });
+  return <>ALGO</>;
 
-  const memoizedRefetch = useCallback(() => {
-    refetch();
-  }, [refetch]);
+       
+  
+}
 
-  useEffect(() => {
-    if(first > 1) {
-      memoizedRefetch();
-    }
-  }, [first, memoizedRefetch]);
+const ProjectsView = (props) => {
+  const token = sessionStorage.getItem('token');
+  const user = jwt.decode(token)?.user;
+  const {data} = useQuery(project);
+  
 
   return (
     <>
-      <section className="grid" style={{"--bs-columns": 4, "--bs-gap": '10px 0'}}>
-        <span>{'Repository name'}</span>
-        <span className="g-col-3">{'Stars count'}</span>
-        {data?.viewer?.repositories?.nodes?.map(({ name, stargazers, id, viewerHasStarred }) => (
-        <>
-          <span>{name}</span>
-          <span>{stargazers.totalCount}</span>
-          <span className="g-col-2">
-            {viewerHasStarred ? <button className="btn btn-dark" onClick={() => removeStar({ variables: { starrableId: id } })}>Remove star</button> 
-            : <button className="btn btn-dark" onClick={() => addStar({ variables: { starrableId: id } })}>Add star</button>}
-          </span>
+  {!data ? <></> : data?.allProjectsEstudiante019?.map(project => {
+    return (
+      <>
+
+    <div key={project._id} className="card" style={{"marginTop": '10px'}}>
+                <div className="card-body">
+                    <h5 className="card-title">{project.name}</h5>
+                    <p className="card-text">{project.leader.fullName}</p>
+                    <h6 className="card-subtitle mb-2 text-muted">Lider del proyecto:</h6>
+                    <p className="card-text">{project.leader.email}</p>
+                    <h6 className="card-subtitle mb-2 text-muted">Fecha peticion del registro:</h6>
+                    <p className="card-text">{project.generalObjective}</p>
+                    <h6 className="card-subtitle mb-2 text-muted">Fecha peticion del registro:</h6>
+                    <p className="card-text">{project.startDate}</p>
+                    <h6 className="card-subtitle mb-2 text-muted">Fecha peticion del registro:</h6>
+                    <p className="card-text">{project.budget}</p>
+                    <h6 className="card-subtitle mb-2 text-muted">Fecha peticion del registro:</h6>
+                    <p className="card-text">{project.status}</p>
+
+                    <button className="btn btn-primary" style= {{"marginRight": "10px"}} onClick={() => props.onClick(project.name,"registro")}>Pedir Registro</button>
+                </div>
+            </div>
         </>
-        ))}
-      </section>
-      <button className="btn btn-primary" onClick={() => setFirst(first + 1)}>Load more</button>
-    </>
-  )
-};
+                    
+        )
+       })}
+     </>
+   )
+   
+   };
+   class Projects extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            project_name: null,
+            module:null,
+            initialValuesProject:{
+                name: null
+            }
+        }
+    }
+    handleClick(id, module)
+    {
+     this.setState(
+         {
+             module: module,
+             project_name: id
+             
+         }
+     )   
+    }
+
+
+    render()
+    {
+        if(this.state.module === "registro")
+        {
+            return <RegistroButon project_name={this.state.project_name} />
+        }
+        else
+        {
+            return <ProjectsView onClick={(id, module) => this.handleClick(id, module)}/>
+        }
+
+    }
+
+}
+
 
 export default Projects;
