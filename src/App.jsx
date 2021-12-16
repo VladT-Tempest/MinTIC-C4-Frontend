@@ -14,6 +14,7 @@ import Menu from 'components/menu.component';
 import Users from 'users/views/users.view';
 import Login from 'users/views/login.view';
 import NoAccess from 'components/no-access.component';
+import UpdateUser from 'users/views/updateUser.view';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route index element={<Users />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="login" element={<Login />} />
+            <Route path="updateUser" element={<UpdateUser />} />
           </Route>
           <Route path="no-access" element={<NoAccess />}/>
         </Routes>
