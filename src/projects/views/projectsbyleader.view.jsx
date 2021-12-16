@@ -117,6 +117,13 @@ const EditProject = (props) => {
         <>
         <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={2}>
         <Box gridColumn="2 / span 2">
+        <Collapse in={error}>
+          <Alert severity="error" onClose={() => setError(false)} sx={{ mt: 2 }}>
+            No estas logueado como lider.
+          </Alert>
+        </Collapse>
+      </Box>
+        <Box gridColumn="2 / span 2">
         <Formik
           enableReinitialize={true} 
           initialValues={initialValues}
@@ -131,7 +138,7 @@ const EditProject = (props) => {
               }
             })
             .then(response => {
-              navigate('/');
+                window.location.reload();
             })
             .catch(() => setError(true));
           }}
@@ -146,6 +153,7 @@ const EditProject = (props) => {
                 label="Nombre"
                 margin="normal"
                 variant="outlined"
+                focused
                 {...getFieldProps('name')}
               />
               <TextField
@@ -153,6 +161,8 @@ const EditProject = (props) => {
                 label="Objetivo general"
                 margin="normal"
                 variant="outlined"
+                multiline
+                focused
                 {...getFieldProps('generalObjective')}
               />
               <Button type="submit" variant="contained" sx={{ mt: 1 }} >Actualizar</Button>
@@ -201,6 +211,13 @@ const EditAdvanceProject = (props) => {
         <>
         <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={2}>
         <Box gridColumn="2 / span 2">
+        <Collapse in={error}>
+          <Alert severity="error" onClose={() => setError(false)} sx={{ mt: 2 }}>
+            No estas logueado como lider.
+          </Alert>
+        </Collapse>
+      </Box>
+        <Box gridColumn="2 / span 2">
         <Formik
           enableReinitialize={true} 
           initialValues={initialValues}
@@ -213,7 +230,7 @@ const EditAdvanceProject = (props) => {
               }
             })
             .then(response => {
-              navigate('/');
+               window.location.reload();
             })
             .catch(() => setError(true));
           }}
@@ -228,6 +245,7 @@ const EditAdvanceProject = (props) => {
                 label="Observaciones"
                 margin="normal"
                 variant="outlined"
+                focused
                 {...getFieldProps('observations')}
               />
               <Button type="submit" variant="contained" sx={{ mt: 1 }} >Actualizar</Button>
