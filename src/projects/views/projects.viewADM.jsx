@@ -1,7 +1,7 @@
 // vendors
 // eslint-disable-next-line
 import React from "react";
-import { useQuery, gql } from '@apollo/client';
+import { useMutation, useQuery, gql } from '@apollo/client';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -22,14 +22,16 @@ const PROJECTS = gql `
 `;
 
 // HU_007
-// mutation ApproveProject( $name: String!) {
-//   approveProject(name: $name) {
-//     name
-//     startDate
-//     status
-//     phase    
-//   }
-// }
+const APPROVEPROYECT = gql `
+mutation ApproveProject( $name: String!) {
+  approveProject(name: $name) {
+    name
+    startDate
+    status
+    phase    
+  }
+}
+`;
 
 // HU_008
 // mutation ProjectChangeStatus($name: String!, $status: ProjectStatus!) {
@@ -53,6 +55,8 @@ const PROJECTS = gql `
 
 const Projects = () => {
   const { data } = useQuery(PROJECTS);
+  const [ activar ] = useMutation(APPROVEPROYECT, {refetchQueries: [PROJECTS] }); 
+
   return <>
     <Container className="mt-2 mb2 border">
       <Row>
@@ -80,7 +84,7 @@ const Projects = () => {
             <Col>{project.status}</Col>
             <Col>
             {(project.status === 'ACTIVE' ? <Button variant="primary" size="sm">Inactivar</Button>  : 
-            project.status === 'INACTIVE' ? <Button variant="primary" size="sm">Activar</Button> :
+            project.status === 'INACTIVE' ? <button onClick={() => activar({status: "ACTIVE"})} className="btn btn-primary">Activar</button> : 
             <></>)}
             </Col>
             <Col>{project.phase}</Col>
