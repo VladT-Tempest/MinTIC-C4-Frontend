@@ -286,8 +286,7 @@ const EnrollmentsProject = (props) => {
 const ProjectsByleader = (props) => {
     const token = sessionStorage.getItem('token');
     const user = jwt.decode(token)?.user;
-    const {data} = useQuery(PROJECTS_BY_LEADER, {variables: { email: "john.snow@mail.com" } });
-
+    const {data} = useQuery(PROJECTS_BY_LEADER, {variables: { email: user?.email } });
     return (
         <>
         {data?.FindByleader?.map(({ name, generalObjective, budget, specificObjectives, _id}) => {
