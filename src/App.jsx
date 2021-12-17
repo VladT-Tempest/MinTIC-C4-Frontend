@@ -16,7 +16,7 @@ import Login from 'users/views/login.view';
 import NoAccess from 'components/no-access.component';
 import IndexProyectos from 'projects/views/Index';
 import NewProject from 'projects/views/NewProject';
-
+import Allstudents from 'users/views/AllStudents';
 
 function App() {
   return (
@@ -28,10 +28,11 @@ function App() {
           <Route path="projects" element={<Projects />} />
           <Route path="projectslist" element={<IndexProyectos />} />
           <Route path="projects/New" element={<NewProject />} />
-          <Route path="users">
-            <Route index element={<Users />} />
-            <Route path="signup" element={<SignUp />} />
-            <Route path="login" element={<Login />} />
+          <Route path="users"/>
+          <Route path="users/Students"element={<Allstudents />}>
+          <Route index element={<Users />} />
+          <Route path="signup" element={<SignUp />} />
+          <Route path="login" element={<Login />} />
           </Route>
           <Route path="no-access" element={<NoAccess />}/>
         </Routes>

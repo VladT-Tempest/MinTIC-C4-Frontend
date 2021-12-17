@@ -73,7 +73,7 @@ const NewProject = (props) => {
     const [Projectnew] = useMutation(CREAR_PROYECTO);
     //if (loading) return <div>Cargando ...</div>
     const initialValues = {
-        name: data?.project?.name,
+        name: '',
         generalObjective: '',
         specificObjectives : '',
         budget: '',
@@ -172,7 +172,9 @@ const NewProject = (props) => {
                 onSubmit={values => {
                     Projectnew({
                         variables: {
-                            ...values,
+                            input:{
+                                ...values
+                            },
                             id: props.id_project
                         }
                     })
@@ -354,10 +356,12 @@ class NewPROYECT extends React.Component {
     {
         if(this.state.module === "newproject")
         {
+            console.log("DATOS")
             return <NewProject 
             id_project={this.state.id_project} 
             onClick={(id, module) => this.handleClick(id, module)}
             />
+            
         }   
     }
 }
