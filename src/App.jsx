@@ -14,6 +14,9 @@ import Menu from 'components/menu.component';
 import Users from 'users/views/users.view';
 import Login from 'users/views/login.view';
 import NoAccess from 'components/no-access.component';
+import IndexProyectos from 'projects/views/Index';
+import NewProject from 'projects/views/NewProject';
+
 
 function App() {
   return (
@@ -21,8 +24,10 @@ function App() {
       <Menu />
       <Container>
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<Home />} /> 
           <Route path="projects" element={<Projects />} />
+          <Route path="projectslist" element={<IndexProyectos />} />
+          <Route path="projects/New" element={<NewProject />} />
           <Route path="users">
             <Route index element={<Users />} />
             <Route path="signup" element={<SignUp />} />
@@ -31,7 +36,7 @@ function App() {
           <Route path="no-access" element={<NoAccess />}/>
         </Routes>
       </Container>
-    </>
+    </> 
   );
 }
 
