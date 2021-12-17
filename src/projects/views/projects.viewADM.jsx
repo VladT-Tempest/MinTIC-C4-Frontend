@@ -15,6 +15,7 @@ const PROJECTS = gql `
         startDate
         endDate
         status
+        phase
     }
   }
 `;
@@ -22,19 +23,20 @@ const PROJECTS = gql `
 const Projects = () => {
   const { data } = useQuery(PROJECTS);
   return <>
-    <Container>
+    <Container className="mt-2 mb2">
       <Row>
         <Col><h2 className="text-center">PROYECTOS</h2></Col>
       </Row>
     </Container>
-    <Container>
-    <Row>
-        <Col><b>Nombre</b></Col>
-        <Col><b>Fecha Inicio</b></Col>
-        <Col><b>Fecha Final</b></Col>
-        <Col><b>status</b></Col>
-    </Row>
-  </Container>
+    <Container className="mb-2">
+      <Row>
+          <Col><b>Nombre</b></Col>
+          <Col><b>Fecha Inicio</b></Col>
+          <Col><b>Fecha Finalización</b></Col>
+          <Col><b>Estado</b></Col>
+          <Col><b>Fase</b></Col>
+      </Row>
+      </Container>
   {!data ? <></> : data?.allProjects?.map(project => (
     <>
       <Container>
@@ -43,6 +45,7 @@ const Projects = () => {
             <Col>{project.startDate}</Col>
             <Col>{project.endDate}</Col>
             <Col>{project.status}</Col>
+            <Col>{project.phase}</Col>
         </Row>
       </Container>
     </>
