@@ -5,6 +5,7 @@ import { useQuery, gql } from '@apollo/client';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button'
 
 // HU006 Administrador podrá ver la información de los usuarios registrados en la plataforma
 
@@ -20,10 +21,40 @@ const PROJECTS = gql `
   }
 `;
 
+// HU_007
+// mutation ApproveProject( $name: String!) {
+//   approveProject(name: $name) {
+//     name
+//     startDate
+//     status
+//     phase    
+//   }
+// }
+
+// HU_008
+// mutation ProjectChangeStatus($name: String!, $status: ProjectStatus!) {
+//   projectChangeStatus(name: $name, status: $status) {
+//     name
+//     status    
+//   }
+// }
+
+// HU_009
+// mutation ProjectChangePhase($name: String!) {
+//   projectChangePhase(name: $name) {
+//     name
+//     endDate
+//     status
+//     phase
+//   }
+// }
+
+
+
 const Projects = () => {
   const { data } = useQuery(PROJECTS);
   return <>
-    <Container className="mt-2 mb2">
+    <Container className="mt-2 mb2 border">
       <Row>
         <Col><h2 className="text-center">PROYECTOS</h2></Col>
       </Row>
@@ -34,7 +65,9 @@ const Projects = () => {
           <Col><b>Fecha Inicio</b></Col>
           <Col><b>Fecha Finalización</b></Col>
           <Col><b>Estado</b></Col>
+          <Col></Col>
           <Col><b>Fase</b></Col>
+          <Col></Col>
       </Row>
       </Container>
   {!data ? <></> : data?.allProjects?.map(project => (
@@ -45,7 +78,17 @@ const Projects = () => {
             <Col>{project.startDate}</Col>
             <Col>{project.endDate}</Col>
             <Col>{project.status}</Col>
+            <Col>
+            {(project.status === 'ACTIVE' ? <Button variant="primary" size="sm">Inactivar</Button>  : 
+            project.status === 'INACTIVE' ? <Button variant="primary" size="sm">Activar</Button> :
+            <></>)}
+            </Col>
             <Col>{project.phase}</Col>
+            <Col>
+            {(project.phase === 'STARTED' ? <Button variant="primary" size="sm">Finalizar</Button>  : 
+            project.pahse === 'ENDED' ? <Button variant="primary" size="sm">Iniciar</Button> :
+            <></>)}
+            </Col>
         </Row>
       </Container>
     </>
