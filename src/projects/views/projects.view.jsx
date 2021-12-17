@@ -1,5 +1,5 @@
 // vendors
-import React from "react";
+import React, {useState} from "react";
 import { useMutation, useQuery, gql } from '@apollo/client';
 import jwt from 'jsonwebtoken';
 
@@ -25,7 +25,7 @@ const project = gql `
   }
 `;
 
-const EDIT_PROJECT = gql `
+const registrarEnrrolment = gql `
   mutation RegisterEnrrolment020($input: enrrolmentInput!) {
   registerEnrrolment020(input: $input) 
         {
@@ -36,7 +36,8 @@ const EDIT_PROJECT = gql `
 `;
 const RegistroButon = (props) => {
   console.log(props.project_name);
-  const [editProject] = useMutation(EDIT_PROJECT);
+  const [error, setError] = useState(false);
+  const [editProject] = useMutation(registrarEnrrolment);
   
   
   editProject({
@@ -47,8 +48,12 @@ const RegistroButon = (props) => {
 
     }
   })
+  .then(response => {
+     window.location.reload();
+  })
+  .catch(() => setError(true));
 
-  return <>ALGO</>;
+  return <></>;
 
        
   
@@ -69,16 +74,16 @@ const ProjectsView = (props) => {
     <div key={project._id} className="card" style={{"marginTop": '10px'}}>
                 <div className="card-body">
                     <h5 className="card-title">{project.name}</h5>
-                    <p className="card-text">{project.leader.fullName}</p>
-                    <h6 className="card-subtitle mb-2 text-muted">Lider del proyecto:</h6>
-                    <p className="card-text">{project.leader.email}</p>
-                    <h6 className="card-subtitle mb-2 text-muted">Fecha peticion del registro:</h6>
                     <p className="card-text">{project.generalObjective}</p>
-                    <h6 className="card-subtitle mb-2 text-muted">Fecha peticion del registro:</h6>
+                    <h6 className="card-subtitle mb-2 text-muted">Lider del proyecto:</h6>
+                    <p className="card-text">{project.leader.fullName}</p>
+                    <h6 className="card-subtitle mb-2 text-muted">Correo del Lider:</h6>
+                    <p className="card-text">{project.leader.email}</p>
+                    <h6 className="card-subtitle mb-2 text-muted">Fecha inicio del proyecto:</h6>
                     <p className="card-text">{project.startDate}</p>
-                    <h6 className="card-subtitle mb-2 text-muted">Fecha peticion del registro:</h6>
+                    <h6 className="card-subtitle mb-2 text-muted">Presupuesto:</h6>
                     <p className="card-text">{project.budget}</p>
-                    <h6 className="card-subtitle mb-2 text-muted">Fecha peticion del registro:</h6>
+                    <h6 className="card-subtitle mb-2 text-muted">Estado del proyecto:</h6>
                     <p className="card-text">{project.status}</p>
 
                     <button className="btn btn-primary" style= {{"marginRight": "10px"}} onClick={() => props.onClick(project.name,"registro")}>Pedir Registro</button>

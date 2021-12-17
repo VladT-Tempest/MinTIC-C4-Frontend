@@ -26,6 +26,12 @@ const Menu = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/users">{'Usuarios'}</Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/registros">{'registros'}</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/leader">{'LEADER'}</Link>
+            </li>
           </ul>
           <ul className="navbar-nav justify-content-end collapse navbar-collapse">
             {token ? <>Hola, {user.fullName}
