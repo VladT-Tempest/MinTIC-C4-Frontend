@@ -27,10 +27,10 @@ const Menu = () => {
               <Link className="nav-link" to="/users">{'Usuarios'}</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/registros">{'registros'}</Link>
+              <Link className="nav-link" to="/registros">{'Registros'}</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/leader">{'LEADER'}</Link>
+              <Link className="nav-link" to="/leader">{'Líder'}</Link>
             </li>
           </ul>
           <ul className="navbar-nav justify-content-end collapse navbar-collapse">
