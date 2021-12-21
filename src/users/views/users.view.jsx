@@ -27,7 +27,7 @@ const Users = () => {
   return <>
     <Container>
       <Row>
-        <Col><h2 class="text-center">USUARIOS</h2></Col>
+        <Col><h2 className="text-center">USUARIOS</h2></Col>
       </Row>
     </Container>
     <Container>
